@@ -54,6 +54,12 @@ rails c
   user.followed_users
   user2.followed_users
 
+  user.followed? article
+  user.followed_by? user2
+  user2.followed? event
+  event.followed_by? user
+  event.followed_by? user2
+
 
 
 dive into
@@ -87,5 +93,4 @@ todo list
 #. write documents
 #. make the user model name configurable
 #. generator for db migration
-#. duplicate follow?
 #. user follow himself?
