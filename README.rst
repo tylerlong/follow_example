@@ -99,4 +99,5 @@ todo list
 #. write documents
 #. make the User model name configurable
 #. generator for db migration
-#. one line followship for User model
+#. turn "include Followable" to "followable" and no require statement needed
+#. include follow and unfollow controller actions to support ajax?
