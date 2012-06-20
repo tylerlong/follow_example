@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120619163827) do
+ActiveRecord::Schema.define(:version => 20120620030406) do
 
   create_table "articles", :force => true do |t|
     t.integer  "user_id"
@@ -21,6 +21,28 @@ ActiveRecord::Schema.define(:version => 20120619163827) do
   end
 
   add_index "articles", ["user_id"], :name => "index_articles_on_user_id"
+
+  create_table "events", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "events", ["user_id"], :name => "index_events_on_user_id"
+
+  create_table "followships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "followable_id"
+    t.string   "followable_type"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "followships", ["followable_id", "followable_type"], :name => "index_followships_on_followable_id_and_followable_type"
+  add_index "followships", ["user_id", "followable_id", "followable_type"], :name => "index_followships_on_user_id_followable_id_followable_type", :unique => true
+  add_index "followships", ["user_id", "followable_type"], :name => "index_followships_on_user_id_and_followable_type"
+  add_index "followships", ["user_id"], :name => "index_followships_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"
