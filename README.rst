@@ -60,6 +60,12 @@ rails c
   event.followed_by? user
   event.followed_by? user2
 
+  user.followers
+  user.followed_by?(user2)
+  user2.unfollow(user)
+  user.followers
+  user.followed_by?(user2)
+
 
 
 dive into
@@ -94,3 +100,5 @@ todo list
 #. make the user model name configurable
 #. generator for db migration
 #. user follow himself?
+#. optimize sql queries
+#. followers cache after deleting followship (change it to a pure sql query)

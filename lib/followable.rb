@@ -16,8 +16,17 @@ module Followable
           self.followships.create(followable: model) unless followed?(model)
         end
 
+        def unfollow(model)
+          followship = followship(model)
+          followship.destroy if followship
+        end
+
         def followed?(model)
           self.followships.where(followable_type: model.class.to_s, followable_id: model.id).exists?
+        end
+
+        def followship(model)
+          self.followships.where(followable_type: model.class.to_s, followable_id: model.id).first
         end
       EOF
     end
