@@ -10,7 +10,9 @@ module Followable
         self.followedships.where(user_id: user.id).exists?
       end
     EOF
-    unless User.instance_methods.include?(:follow)
+
+    unless User.instance_methods.include?(:unfollow)
+      User.send(:has_many, :followships)
       User.class_eval <<-EOF
         def follow(model)
           self.followships.create(followable: model) unless followed?(model)
