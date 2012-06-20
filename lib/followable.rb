@@ -3,7 +3,7 @@ module Followable
     model_class.send(:has_many, :followedships, class_name: "Followship", as: :followable)
     model_class.class_eval <<-EOF
       def followers
-        self.followedships.map(&:user)
+        User.joins(:followships).where(followships: { followable_type: "#{model_class.to_s}", followable_id: self.id })
       end
 
       def followed_by?(user)
@@ -32,7 +32,7 @@ module Followable
     end
     User.class_eval <<-EOF
       def followed_#{model_class.to_s.downcase.pluralize}
-        self.followships.where(followable_type: #{model_class}.to_s).map(&:followable)
+        #{model_class.to_s}.joins(:followedships).where(followships: { user_id: self.id })
       end
     EOF
   end

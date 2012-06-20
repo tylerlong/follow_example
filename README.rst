@@ -97,8 +97,6 @@ todo list
 #. make it a ruby gem
 #. release it to rubygems.org
 #. write documents
-#. make the user model name configurable
+#. make the User model name configurable
 #. generator for db migration
-#. user follow himself?
-#. optimize sql queries
-#. followers cache after deleting followship (change it to a pure sql query)
+#. one line followship for User model
